@@ -1,27 +1,28 @@
 require('dotenv').config();
 const { Client, IntentsBitField } = require('discord.js');
+const mongoose = require('mongoose');
+const eventHandler = require('./handlers/eventHandler');
 
 const client = new Client({
   intents: [
     IntentsBitField.Flags.Guilds,
     IntentsBitField.Flags.GuildMembers,
     IntentsBitField.Flags.GuildMessages,
+    IntentsBitField.Flags.GuildPresences,
     IntentsBitField.Flags.MessageContent,
   ],
 });
 
-client.on('ready', (c) => {
-  console.log(`✅ ${c.user.tag} is online.`);
-});
+(async () => {
+  try {
+    mongoose.set('strictQuery', false);
+    await mongoose.connect(process.env.MONGODB_URI);
+    console.log('Connected to DB.');
 
-client.on('messageCreate', (message) => {
-  if (message.author.bot) {
-    return;
+    eventHandler(client);
+
+    client.login(process.env.TOKEN);
+  } catch (error) {
+    console.log(`Error: ${error}`);
   }
-
-  if (message.content === 'hello') {
-    message.reply('hello');
-  }
-});
-
-client.login(process.env.TOKEN);
+})();
