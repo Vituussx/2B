@@ -16,7 +16,7 @@ module.exports = {
    */
   callback: async (client, interaction) => {
     if (!interaction.inGuild()) {
-      interaction.reply('You can only run this command inside a server.');
+      interaction.reply('Você só consegue rodar este comando dentro de um servidor');
       return;
     }
 
@@ -34,8 +34,8 @@ module.exports = {
     if (!fetchedLevel) {
       interaction.editReply(
         mentionedUserId
-          ? `${targetUserObj.user.tag} doesn't have any levels yet. Try again when they chat a little more.`
-          : "You don't have any levels yet. Chat a little more and try again."
+          ? `${targetUserObj.user.tag} não tem nenhum nível ainda. Tente de novo depois de algumas mesnaagens dessa pessoa`
+          : "Você não tem nenhum nível ainda. Converse mais um pouco e tente de novo"
       );
       return;
     }
@@ -75,11 +75,11 @@ module.exports = {
   },
 
   name: 'level',
-  description: "Shows your/someone's level.",
+  description: "Mostra o level dos usuários",
   options: [
     {
-      name: 'target-user',
-      description: 'The user whose level you want to see.',
+      name: 'usuário',
+      description: 'O level de quem você quer ver?',
       type: ApplicationCommandOptionType.Mentionable,
     },
   ],

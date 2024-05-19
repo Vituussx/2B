@@ -9,7 +9,7 @@ module.exports = {
    */
   callback: async (client, interaction) => {
     if (!interaction.inGuild()) {
-      interaction.reply('You can only run this command inside a server.');
+      interaction.reply('Você só pode executar este comando dentro de um servidor.');
       return;
     }
 
@@ -22,7 +22,7 @@ module.exports = {
 
       if (autoRole) {
         if (autoRole.roleId === targetRoleId) {
-          interaction.editReply('Auto role has already been configured for that role. To disable run `/autorole-disable`');
+          interaction.editReply('O Autorole já foi configurada para essa função. Para desativá-lo, use: `/autorole-disable`');
           return;
         }
 
@@ -35,18 +35,18 @@ module.exports = {
       }
 
       await autoRole.save();
-      interaction.editReply('Autorole has now been configured. To disable run `/autorole-disable`');
+      interaction.editReply('O Autorole agora está configurado. Para desativá-lo, use: `/autorole-disable`');
     } catch (error) {
       console.log(error);
     }
   },
 
-  name: 'autorole-configure',
-  description: 'Configure your auto-role for this server.',
+  name: 'autorole',
+  description: 'Configure o Autorole para esse servidor',
   options: [
     {
       name: 'role',
-      description: 'The role you want users to get on join.',
+      description: 'A função que você deseja que os usuários assumam ao ingressar.',
       type: ApplicationCommandOptionType.Role,
       required: true,
     },

@@ -5,7 +5,7 @@ const dailyAmount = 1000;
 
 module.exports = {
   name: 'daily',
-  description: 'Collect your dailies!',
+  description: 'Colete algum valor diáriamente',
   /**
    *
    * @param {Client} client
@@ -14,7 +14,7 @@ module.exports = {
   callback: async (client, interaction) => {
     if (!interaction.inGuild()) {
       interaction.reply({
-        content: 'You can only run this command inside a server.',
+        content: 'Você só consegue rodar este comando dentro de um servidor',
         ephemeral: true,
       });
       return;
@@ -36,7 +36,7 @@ module.exports = {
 
         if (lastDailyDate === currentDate) {
           interaction.editReply(
-            'You have already collected your dailies today. Come back tomorrow!'
+            'Você só coletou a sua daily hoje. Volte amanhã!'
           );
           return;
         }
@@ -53,7 +53,7 @@ module.exports = {
       await user.save();
 
       interaction.editReply(
-        `${dailyAmount} was added to your balance. Your new balance is ${user.balance}`
+        `${dailyAmount} foi adicionado ao seu saldo. Seu novo saldo é ${user.balance}`
       );
     } catch (error) {
       console.log(`Error with /daily: ${error}`);

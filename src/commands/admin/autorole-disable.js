@@ -12,18 +12,18 @@ module.exports = {
       await interaction.deferReply();
 
       if (!(await AutoRole.exists({ guildId: interaction.guild.id }))) {
-        interaction.editReply('Auto role has not been configured for this server. Use `/autorole-configure` to set it up.');
+        interaction.editReply('O Autorole não foi configuado para este servidor. Use `/autorole-configure` para configurá-lo.');
         return;
       }
 
       await AutoRole.findOneAndDelete({ guildId: interaction.guild.id });
-      interaction.editReply('Auto role has been disabled for this server. Use `/autorole-configure` to set it up again.');
+      interaction.editReply('O Autorole já foi desabilitado neste servidor. Use `/autorole-configure` configurá-lo de novo.');
     } catch (error) {
       console.log(error);
     }
   },
 
   name: 'autorole-disable',
-  description: 'Disable auto-role in this server.',
+  description: 'Desabilitar o Autorole neste servidor.',
   permissionsRequired: [PermissionFlagsBits.Administrator],
 };
