@@ -10,7 +10,7 @@ module.exports = {
   callback: async (client, interaction) => {
     if (!interaction.inGuild()) {
       interaction.reply({
-        content: 'You can only run this command inside a server.',
+        content: 'Você só pode usar este comando em um servidor',
         ephemeral: true,
       });
       return;
@@ -23,23 +23,23 @@ module.exports = {
     const user = await User.findOne({ userId: targetUserId, guildId: interaction.guild.id });
 
     if (!user) {
-      interaction.editReply(`<@${targetUserId}> doesn't have a profile yet.`);
+      interaction.editReply(`<@${targetUserId}> ainda não tem perfil.`);
       return;
     }
 
     interaction.editReply(
       targetUserId === interaction.member.id
-        ? `Your balance is **${user.balance}**`
-        : `<@${targetUserId}>'s balance is **${user.balance}**`
+        ? `O seu saldo é **${user.balance}**`
+        : `O saldo de <@${targetUserId}> é **${user.balance}**`
     );
   },
 
-  name: 'balance',
-  description: "See yours/someone else's balance",
+  name: 'saldo',
+  description: "Veja o valor em uma conta",
   options: [
     {
-      name: 'user',
-      description: 'The user whose balance you want to get.',
+      name: 'usuário',
+      description: 'O saldo de quem você quer ver?',
       type: ApplicationCommandOptionType.User,
     },
   ],
